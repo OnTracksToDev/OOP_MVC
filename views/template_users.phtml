@@ -1,0 +1,26 @@
+
+<h1>New user</h1>
+<?php @var_dump($data)?>
+
+
+<form method="POST">
+<div class="mb-3">
+    <label for="username" class="form-label">username</label>
+    <input type="username" class="form-control" id="username" name="username">
+  </div>
+  <div class="mb-3">
+    <label for="realName" class="form-label">Real Name</label>
+    <input type="realName" class="form-control" id="realName" name="realName">
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+  </div>
+  <button type="submit" class="btn btn-primary mt-3" name="send" id="send" >Send</button>
+</form>

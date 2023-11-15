@@ -6,7 +6,7 @@ namespace App\Controllers;
 class Controller{
 
 
-    protected function render($data, $templatePath)
+    protected function render( $templatePath, $data)
     {
         ob_start();
         include $templatePath;

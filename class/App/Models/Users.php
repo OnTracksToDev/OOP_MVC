@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Table;
+use App\Models\AbstractTable;
+use DateTime;
 
-class Users extends Table
+class Users extends AbstractTable
 {
 
     private ?string $username = null;
@@ -12,6 +13,9 @@ class Users extends Table
     private ?string $email = null;
     private ?string $realName = null;
     private ?array $roles = [];
+    private ?DateTime $createdAt = null;
+    private ?DateTime $updatedAt = null;
+
     /*Username */
     public function setUsername(?string $username)
     {
@@ -57,5 +61,44 @@ class Users extends Table
     public function getRoles(): ?array
     {
         return $this->roles;
+    }
+    public function getCreatedAt(): ?DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setUpdatedAt(?DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+    public function getUpdatedAt(): ?DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function validate(): array
+    {
+        $errors = [];
+        /**
+         * Pléthore de vérifications
+         */
+        //verifie que le nom de l'utilisateur est au moins 3 caractères
+        if (strlen($this->username) < 3) {
+            $errors[] = "Le nom d'utilisateur est obligatoire";
+        }
+        //verifie que le nom complet est au moins 3 caractères
+        if (strlen($this->realName) < 3) {
+            $errors[] = "Le nom complet est obligatoire";
+        }
+
+        //si l'email n'est pas valide
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Veuillez saisir un email valide s'il vous plaît";
+        }
+        //si le mot de passe est infereieur à 3 caractères
+        if (strlen($this->password) < 3) {
+            $errors[] = "Le mot de passe doit être au moins 3 caractères";
+        }
+        return $errors;
     }
 }
