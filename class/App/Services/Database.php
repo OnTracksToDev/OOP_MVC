@@ -21,7 +21,7 @@ class Database
     public function __construct(
         $db_host = "localhost",
         $db_port = "3306",
-        $db_name = "dwwn_solidev",
+        $db_name = "oop_mvc",
         $db_user = "root",
         $db_pass = "",
     ) {
