@@ -46,16 +46,27 @@ class Database
             //PDO est appelé une seule fois
             $this->pdo = $db;
         }
+         // TOUT EST OK POUR AVOIR NOTRE OBJET PDO !
+        // PDO EST APPELE UNE SEULE FOIS
         return $this->pdo;
     }
 
-//this function 
-    public function query($statement, $params = [])
-    {
-
+    public function selectAll($statement,$params=[]){
         $stmt = $this->getPDO()->prepare($statement);
         $stmt->execute($params);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $results;
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
-}
+
+    public function select($statement,$params=[]){
+        $stmt = $this->getPDO()->prepare($statement);
+        $stmt->execute($params);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function query($statement,$params=[]){
+        $stmt = $this->getPDO()->prepare($statement);
+        $stmt->execute($params);
+        return $this->getPDO();
+    }}

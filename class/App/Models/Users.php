@@ -75,7 +75,14 @@ class Users extends AbstractTable
     {
         return $this->updatedAt;
     }
-
+    public function toArray(){
+        $userArray = [
+            $this->username, 
+            $this->email, 
+            password_hash($this->password, PASSWORD_DEFAULT)];
+        return $userArray;
+    }
+    
     public function validate(): array
     {
         $errors = [];
