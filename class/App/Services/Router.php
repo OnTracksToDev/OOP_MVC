@@ -16,20 +16,27 @@ class Router
         $this->setAction();
     }
 
-    
-    public function setPage() {
-     $this->page = isset($_GET['page']) && file_exists('./class/App/Controllers/'.ucfirst($_GET['page']).'Controller.php') ? strtolower($_GET['page']):'home';
+    public function setPage()
+    {
+        // Validation du nom de la page 
+        $page = isset($_GET['page']) ? strtolower($_GET['page']) : 'home';
+
+        // Validation du fichier du contrôleur
+        $controllerFile = "./class/App/Controllers/{$page}Controller.php";
+        $this->page = file_exists($controllerFile) ? $page : 'home';
     }
 
     public function getPage()
     {
         return $this->page;
-        return $this->action;
     }
+
     public function setAction()
     {
+        // Validation de l'action 
         $this->action = isset($_GET['action']) ? strtolower($_GET['action']) : 'index';
     }
+
     public function getAction()
     {
         return $this->action;
@@ -40,9 +47,4 @@ class Router
         header('Location: index.php?page=home');
         exit();
     }
-
-
-
-
-
 }

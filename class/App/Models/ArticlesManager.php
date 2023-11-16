@@ -25,10 +25,11 @@ class ArticlesManager
 
     public function getArticleById($id = null)
     {
-        $whereId = !is_null($id) ? "WHERE id=?" : "";
+        $whereId = !is_null($id) ? "WHERE articleID=?" : "";
         $articles = [];
         $articles = $this->db->select("SELECT * FROM articles 
-        JOIN users ON articles.authorID = users.userID" . $whereId . "LIMIT 1", [$id]);
+        JOIN users ON articles.authorID = users.userID " . $whereId . "LIMIT 1", [$id]);
+        
         return $articles;
     }
 
@@ -47,14 +48,6 @@ class ArticlesManager
         return false;
     }
 
-    // public function update($articleID, $imagePath, $title, $content, $authorID)
-    // {
-    //     if (!is_null($articleID)) {
-    //         $this->db->query("UPDATE articles SET imagePath=?, title=?, content=?, authorID=? WHERE articleID=?", [$imagePath, $title, $content, $authorID, $articleID]);
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     public function update($articleId, $imagePath, $title, $content, $authorID)
     {
