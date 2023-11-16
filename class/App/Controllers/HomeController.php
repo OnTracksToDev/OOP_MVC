@@ -12,7 +12,7 @@ class HomeController extends Controller
         $articles = new ArticlesManager();
         $data = $articles->getAll();
         $templatePath = './views/template_home.phtml'; 
-        $this->render($data, $templatePath);
+        $this->render($templatePath, $data);
     }
     
 

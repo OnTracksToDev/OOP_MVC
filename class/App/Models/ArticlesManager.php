@@ -38,12 +38,36 @@ class ArticlesManager
         return $addPic;
     }
 
-    public function delete($id = null)
+    public function delete($articleID = null)
     {
-        if (!is_null($id)) {
-            $this->db->query("DELETE FROM articles WHERE id=?", [$id]);
+        if (!is_null($articleID)) {
+            $this->db->query("DELETE FROM articles WHERE articleID=?", [$articleID]);
             return true;
         }
+        return false;
+    }
+
+    // public function update($articleID, $imagePath, $title, $content, $authorID)
+    // {
+    //     if (!is_null($articleID)) {
+    //         $this->db->query("UPDATE articles SET imagePath=?, title=?, content=?, authorID=? WHERE articleID=?", [$imagePath, $title, $content, $authorID, $articleID]);
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    public function update($articleId, $imagePath, $title, $content, $authorID)
+    {
+        if (!is_null($articleId)) {
+            $query = "UPDATE articles SET imagePath=?, title=?, content=?, authorID=? WHERE articleID=?";
+            $params = [$imagePath, $title, $content, $authorID, $articleId];
+
+
+            $success = $this->db->query($query, $params);
+
+            return $success;
+        }
+
         return false;
     }
 }

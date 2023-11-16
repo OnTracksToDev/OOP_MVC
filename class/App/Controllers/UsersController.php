@@ -9,7 +9,7 @@ use App\Models\UsersManager;
 class UsersController extends Controller
 {
 
-    public function index()
+    public function addusers()
     {
         //on instancie la classe Users pour créer un nouvel utilisateur
         $users = new Users();
@@ -18,32 +18,36 @@ class UsersController extends Controller
         if (isset($_POST['submit'])) {
             //si le formulaire est validé on "hydrat" les données dans l'objet
             //avec les données du formulaire
-            $users->setUsername(strip_tags($_POST['username']));
-            $users->setPassword(strip_tags($_POST['password']));
-            $users->setEmail(strip_tags($_POST['email']));
-            $users->setRealName(strip_tags($_POST['realName']));
+            $users->setUsername($_POST['username']);
+            $users->setRealName($_POST['realName']);
+            $users->setEmail($_POST['email']);
+            $users->setPassword($_POST['password']);
             //si la methode validate ne retourne pas d'erreur on fait l'insert dans la base de données
             $errors = ($users->validate());
+            var_dump($_POST);
             if (empty($errors)) {
                 //on transforme l'objet Users en tableau
                 //avec uniquement les valeurs des propriétés
-                //voir la methode toArray()
+                // Voir la methode toArray() dans User.php
                 $userArray = $users->toArray();
-                //on instancie la classe UsersManager
+                // On instancie un UserManager
                 $usersManager = new UsersManager();
-                //on insert l'utilisateur dans la base de données
+                // On effectue l'insert dans la table
                 $insert = $usersManager->insert($userArray);
-                print_r($insert->lastInsertId());
+                // On est très content !
+
+                echo "<p>C'est parfait ! On a inséré l'utilisateur !</p>";
+                echo "<p>Son id est {$insert->lastInsertId()}</p>";
+                die();
             }
-
-            print_r($userArray);
         }
-
-        $templatePath = './views/template_users.phtml';
+        $templatePath = './views/template_addusers.phtml';
         $this->render($templatePath, [
             '$_POST' => $_POST,
             'users' => $users,
             'error' => $errors
         ]);
     }
+
+    
 }

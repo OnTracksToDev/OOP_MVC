@@ -13,8 +13,6 @@ class Users extends AbstractTable
     private ?string $email = null;
     private ?string $realName = null;
     private ?array $roles = [];
-    private ?DateTime $createdAt = null;
-    private ?DateTime $updatedAt = null;
 
     /*Username */
     public function setUsername(?string $username)
@@ -62,23 +60,24 @@ class Users extends AbstractTable
     {
         return $this->roles;
     }
-    public function getCreatedAt(): ?DateTime
-    {
-        return $this->createdAt;
-    }
+    // public function getCreatedAt(): ?DateTime
+    // {
+    //     return $this->createdAt;
+    // }
 
-    public function setUpdatedAt(?DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-    public function getUpdatedAt(): ?DateTime
-    {
-        return $this->updatedAt;
-    }
+    // public function setUpdatedAt(?DateTime $updatedAt)
+    // {
+    //     $this->updatedAt = $updatedAt;
+    // }
+    // public function getUpdatedAt(): ?DateTime
+    // {
+    //     return $this->updatedAt;
+    // }
     public function toArray(){
         $userArray = [
             $this->username, 
             $this->email, 
+            $this->realName,
             password_hash($this->password, PASSWORD_DEFAULT)];
         return $userArray;
     }

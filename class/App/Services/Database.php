@@ -2,7 +2,7 @@
 namespace App\Services;
 use PDO;
 use PDOException;
-
+require_once "./config.php";
 class Database
 {
 
@@ -19,11 +19,11 @@ class Database
     //PDO 
     private $pdo;
     public function __construct(
-        $db_host = "localhost",
-        $db_port = "3306",
-        $db_name = "oop_mvc",
-        $db_user = "root",
-        $db_pass = "",
+        $db_host = DB_HOST,
+        $db_port = DB_PORT,
+        $db_name = DB_NAME,
+        $db_user = DB_USER,
+        $db_pass = DB_PASS,
     ) {
         $this->db_user = $db_user;
         $this->db_port = $db_port;

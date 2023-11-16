@@ -16,7 +16,7 @@ class UsersManager
 
     public function insert($data = [])
     {
-        $addUser = $this->db->query("INSERT INTO users (username, password, email, realName) VALUES (:username, :password, :email, :realName),$data");
+        $addUser = $this->db->query("INSERT INTO users (username, realName, email, password ) VALUES (?,?,?,?)",$data);
         return $addUser;
     }
 }
